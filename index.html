@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinki Kumari — Full Stack Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF8;
+    --paper:#FFFFFF;
+    --ink:#15171C;
+    --ink-soft:#52565F;
+    --ink-faint:#90939B;
+    --line:#E4E1D9;
+    --accent:#2A4FD6;
+    --accent-soft:#EBF0FF;
+    --tab-admin:#2A4FD6;
+    --tab-user:#1C8C5B;
+    --tab-employer:#C7740A;
+    --tab-other:#8A4FC7;
+    --radius:10px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;
+    height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* NAV */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,250,248,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:18px;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    transition:color .2s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--accent);}
+  .nav-links a.active{color:var(--accent);}
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-6px;
+    height:2px;
+    background:var(--accent);
+    border-radius:2px;
+  }
+  @media (max-width:760px){
+    .nav-links a.active::after{display:none;}
+    .nav-links li:has(a.active){background:var(--accent-soft);}
+  }
+  .nav-cta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    text-decoration:none;
+    border:1px solid var(--ink);
+    padding:7px 14px;
+    border-radius:6px;
+    transition:background .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--paper);}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise .8s ease forwards;
+  }
+  @keyframes rise{to{opacity:1; transform:translateY(0);}}
+
+  .hero h1{
+    font-size:clamp(40px, 7vw, 76px);
+    line-height:1.02;
+    max-width:820px;
+  }
+  .hero .role{
+    margin-top:18px;
+    font-size:clamp(17px,2.4vw,21px);
+    color:var(--ink-soft);
+    max-width:600px;
+  }
+  .hero .role strong{color:var(--ink); font-weight:600;}
+  .hero-meta{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:6px 12px;
+    border-radius:999px;
+  }
+  .hero-actions{
+    margin-top:36px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:7px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{background:var(--accent); transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent);}
+
+  /* SECTION SHARED */
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .section-head{
+    margin-bottom:40px;
+  }
+  .section-head h2{
+    font-size:clamp(26px,4vw,34px);
+    margin-top:10px;
+  }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .about-grid p{color:var(--ink-soft); font-size:16px; margin:0 0 16px;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .fact-list{
+    border-top:1px solid var(--line);
+  }
+  .fact{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .fact span:first-child{color:var(--ink-faint); font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em;}
+  .fact span:last-child{color:var(--ink); text-align:right;}
+
+  /* SKILLS */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:28px;
+  }
+  .skill-group{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .skill-group h3{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+    margin-bottom:14px;
+    font-weight:600;
+  }
+  .skill-chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-chip{
+    font-size:13px;
+    padding:6px 11px;
+    border-radius:6px;
+    background:var(--bg);
+    border:1px solid var(--line);
+  }
+
+  /* PROJECTS */
+  .project-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:24px;
+    overflow:hidden;
+  }
+  .panel-tabs{
+    display:flex;
+    border-bottom:1px solid var(--line);
+    background:var(--bg);
+  }
+  .panel-tab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.04em;
+    padding:10px 16px;
+    color:var(--paper);
+    position:relative;
+    text-transform:uppercase;
+  }
+  .panel-tab::before{
+    content:"●";
+    font-size:7px;
+    margin-right:6px;
+    opacity:.8;
+  }
+  .project-body{
+    padding:28px;
+  }
+  .project-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .project-top h3{
+    font-family:'Fraunces',serif;
+    font-size:24px;
+    font-weight:600;
+  }
+  .project-stack{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-top:4px;
+  }
+  .project-links{display:flex; gap:10px; flex-shrink:0;}
+  .project-links a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:7px 13px;
+    border-radius:6px;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .project-links a:hover{border-color:var(--accent); color:var(--accent);}
+  .project-body p{color:var(--ink-soft); margin:0 0 14px;}
+  .project-body ul{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink-soft);
+    font-size:14.5px;
+  }
+  .project-body ul li{margin-bottom:6px;}
+  .status-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    padding:4px 9px;
+    border-radius:5px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    margin-left:10px;
+    vertical-align:middle;
+  }
+
+  /* TIMELINE (experience + education) */
+  .timeline{
+    border-left:2px solid var(--line);
+    padding-left:28px;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+  .t-item{position:relative;}
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-34px;
+    top:4px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--accent);
+    border:3px solid var(--bg);
+    outline:2px solid var(--accent);
+  }
+  .t-item .t-date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .t-item h3{
+    font-size:19px;
+    margin-top:6px;
+  }
+  .t-item .t-sub{color:var(--ink-soft); font-size:14.5px; margin-top:3px;}
+  .t-item p.t-desc{color:var(--ink-soft); margin-top:10px; font-size:14.5px;}
+
+  /* CERTS + LANGUAGES */
+  .two-col{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:48px;
+  }
+  .cert-list{list-style:none; margin:0; padding:0;}
+  .cert-list li{
+    display:flex;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .cert-list li:first-child{padding-top:0;}
+  .cert-list li::before{
+    content:"✓";
+    font-family:'JetBrains Mono',monospace;
+    color:var(--accent);
+    flex-shrink:0;
+  }
+  .lang-chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+
+  /* FOOTER / CONTACT */
+  footer{
+    padding:72px 0 48px;
+  }
+  .contact-box{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:16px;
+    padding:56px 40px;
+    text-align:center;
+  }
+  .contact-box h2{
+    font-size:clamp(28px,4.5vw,42px);
+    color:var(--paper);
+  }
+  .contact-box p{
+    color:#C7C9D1;
+    margin-top:14px;
+    font-size:15px;
+  }
+  .contact-actions{
+    margin-top:32px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .contact-actions .btn-primary{background:var(--paper); color:var(--ink);}
+  .contact-actions .btn-primary:hover{background:var(--accent); color:var(--paper);}
+  .contact-actions .btn-ghost{border-color:#4A4D57; color:var(--paper);}
+  .contact-actions .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .footer-bottom{
+    margin-top:36px;
+    text-align:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed;
+      top:64px;
+      left:0;
+      right:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:320px;}
+    .nav-links li{padding:14px 28px; border-bottom:1px solid var(--line);}
+    .nav-toggle{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      background:none;
+      border:none;
+      cursor:pointer;
+      padding:6px;
+    }
+    .nav-toggle span{width:20px; height:2px; background:var(--ink);}
+    .about-grid, .two-col{grid-template-columns:1fr;}
+    .contact-box{padding:40px 22px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-name">Pinki Kumari</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a class="nav-cta" href="mailto:pk0540080@gmail.com">Say hello</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Full stack web developer · India</div>
+    <h1 style="margin-top:18px;">Building applications<br>with a panel for every kind of user.</h1>
+    <p class="role">B.Tech Computer Science student (final semester) specializing in the <strong>MERN</strong> and <strong>MEAN</strong> stacks — from job portals built for accessibility to real-time chat apps with role-based access for every project.</p>
+    <div class="hero-meta">
+      <span class="pill">📍 India</span>
+      <span class="pill">🎓 Final year, B.Tech CSE</span>
+      <span class="pill">💼 Full Stack Dev Intern @ Sensation Software Solutions</span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View projects</a>
+      <a class="btn btn-ghost" href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/pinki-kumari-633726345" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">About</div>
+      <h2>Final-year developer, six live products deep.</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Computer Science Engineering student at Lyallpur Khalsa College Technical Campus, Jalandhar, currently wrapping up my final semester. Over the past two years I've moved from coursework into building full, multi-role applications end to end — the kind with separate admin, user, and sometimes employer experiences, each with its own permissions and views.</p>
+        <p>My most recent project, <strong>Talent Without Limits</strong>, is a MERN-stack job portal built specifically for people with disabilities, with accessibility-aware filters like wheelchair and hearing accessibility. Alongside it, I've shipped a real-time chat app with an AI assistant, a nursery e-commerce platform, a role-based news CMS, and an online art studio with a bidding system — and I'm currently building a campus marketplace where colleges register and manage their own student communities.</p>
+        <p>I completed a 6-month full stack development internship at Sensation Software Solutions, Mohali, during my 8th semester, and hold an AWS Cloud Foundations certification alongside in-college cyber security training.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><span>Based in</span><span>India</span></div>
+        <div class="fact"><span>Email</span><span>pk0540080@gmail.com</span></div>
+        <div class="fact"><span>Phone</span><span>+91 98150 85147</span></div>
+        <div class="fact"><span>Education</span><span>B.Tech CSE, 2022–2026</span></div>
+        <div class="fact"><span>Internship</span><span>Sensation Software Solutions</span></div>
+        <div class="fact"><span>Languages</span><span>Hindi, English, Punjabi</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Skills</div>
+      <h2>Tools I build with.</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="skill-chip-row">
+          <span class="skill-chip">JavaScript</span>
+          <span class="skill-chip">C</span>
+          <span class="skill-chip">C++</span>
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <div class="skill-chip-row">
+          <span class="skill-chip">Node.js</span>
+          <span class="skill-chip">Express.js</span>
+          <span class="skill-chip">MongoDB</span>
+          <span class="skill-chip">Firebase</span>
+          <span class="skill-chip">Socket.io</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <div class="skill-chip-row">
+          <span class="skill-chip">Angular</span>
+          <span class="skill-chip">React</span>
+          <span class="skill-chip">HTML / CSS</span>
+          <span class="skill-chip">Tailwind CSS</span>
+          <span class="skill-chip">Material UI</span>
+          <span class="skill-chip">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools & cloud</h3>
+        <div class="skill-chip-row">
+          <span class="skill-chip">VS Code</span>
+          <span class="skill-chip">Git / GitHub</span>
+          <span class="skill-chip">AWS Cloud Foundations</span>
+          <span class="skill-chip">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Projects</div>
+      <h2>Six products. Every one built panel by panel.</h2>
+    </div>
+
+    <!-- Talent Without Limits -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-admin)">Admin</span>
+        <span class="panel-tab" style="background:var(--tab-employer)">Employer</span>
+        <span class="panel-tab" style="background:var(--tab-user)">Candidate</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>Talent Without Limits <span class="status-tag">Major project</span></h3>
+            <div class="project-stack">MERN · MongoDB · Express · React · Node.js</div>
+          </div>
+          <div class="project-links">
+            <a href="https://job-portal-frontend-in48-git-master-pinki-s-projects.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>A job portal built specifically for people with disabilities. Employers post roles, admins approve listings before they go live, and candidates apply using filters tuned to their needs.</p>
+        <ul>
+          <li>Accessibility-first filters — wheelchair access, hearing accessibility, and more</li>
+          <li>Resume upload and application tracking for candidates</li>
+          <li>Three distinct dashboards with an admin approval workflow gating every job post</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Omni Chats -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-user)">Chat</span>
+        <span class="panel-tab" style="background:var(--tab-other)">AI assistant</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>Omni Chats</h3>
+            <div class="project-stack">MERN · Socket.io</div>
+          </div>
+          <div class="project-links">
+            <a href="https://omni-chats-frontend-z1ir.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>A real-time messaging app where users see who's online and chat instantly, with an built-in AI assistant users can talk to alongside their regular conversations.</p>
+        <ul>
+          <li>Real-time messaging powered by Socket.io</li>
+          <li>Live presence — see which users are available to chat</li>
+          <li>Conversational AI assistant integrated directly into the chat interface</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Art Studio -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-admin)">Admin</span>
+        <span class="panel-tab" style="background:var(--tab-user)">Artist / Bidder</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>Art Studio <span class="status-tag">45-day training project</span></h3>
+            <div class="project-stack">Angular · Firebase</div>
+          </div>
+          <div class="project-links">
+            <a href="https://art-studio-angualr-project-odiq.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>An online gallery where artists showcase paintings and sketches, and visitors can place bids on the pieces they want. Built during a 45-day Angular and Firebase training program.</p>
+        <ul>
+          <li>Artist profiles for showcasing original artwork</li>
+          <li>A bidding system — the highest bid closes the deal</li>
+          <li>Admin oversight across listings, artists, and active bids</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- News Sphere -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-admin)">Admin</span>
+        <span class="panel-tab" style="background:var(--tab-user)">Reader / Viewer</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>NewsSphere</h3>
+            <div class="project-stack">MEAN · MongoDB · Express · Angular · Node.js</div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>A full-stack news platform spanning politics, sports, and technology, with admins publishing articles and video content and readers engaging through comments, reactions, and live polls.</p>
+        <ul>
+          <li>Role-based access across admins, viewers, and readers</li>
+          <li>Article and video publishing across multiple categories</li>
+          <li>Comments, likes/dislikes, and poll-based reader engagement</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Green Horizon -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-admin)">Admin</span>
+        <span class="panel-tab" style="background:var(--tab-user)">Customer</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>Green Horizon</h3>
+            <div class="project-stack">MEAN · MongoDB · Express · Angular · Node.js</div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>An e-commerce platform for a plant nursery, bringing inventory, orders, and payments online so the business doesn't depend on in-person sales alone.</p>
+        <ul>
+          <li>Customers browse, wishlist, and buy plants with paginated catalog browsing</li>
+          <li>Order management with a simulated payment flow</li>
+          <li>Admin tools for inventory, orders, and stock control</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Campus Marketplace -->
+    <div class="project-card">
+      <div class="panel-tabs">
+        <span class="panel-tab" style="background:var(--tab-admin)">Admin</span>
+        <span class="panel-tab" style="background:var(--tab-other)">College</span>
+        <span class="panel-tab" style="background:var(--tab-user)">Student</span>
+      </div>
+      <div class="project-body">
+        <div class="project-top">
+          <div>
+            <h3>Campus Marketplace <span class="status-tag">In progress</span></h3>
+            <div class="project-stack">MERN · Socket.io</div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <p>A buy-and-sell marketplace scoped to individual colleges. Colleges register once and manage their own student community; students trade notes, gadgets, and other items only within their own campus.</p>
+        <ul>
+          <li>One-time college registration, with students restricted to their own campus listings</li>
+          <li>Direct buyer-seller chat via Socket.io before a deal is made</li>
+          <li>Admin layer for managing registered colleges across the platform</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked.</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">8th semester</div>
+        <h3>Full Stack Developer Intern</h3>
+        <div class="t-sub">Sensation Software Solutions Pvt. Ltd., Mohali</div>
+        <p class="t-desc">A 6-month internship applying the MERN/MEAN stack in a professional setting — working across both frontend and backend on real development tasks alongside the engineering team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Education</div>
+      <h2>Academic background.</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2022 — 2026</div>
+        <h3>B.Tech, Computer Science Engineering</h3>
+        <div class="t-sub">Lyallpur Khalsa College Technical Campus, Jalandhar</div>
+        <p class="t-desc">Currently completing final semester examinations.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2022</div>
+        <h3>XII, PSEB — 87.4%</h3>
+        <div class="t-sub">Govt. Senior Secondary School, Hazara</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2020</div>
+        <h3>X, PSEB — A+</h3>
+        <div class="t-sub">Govt. Senior Secondary School, Hazara</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificates" style="border-bottom:1px solid var(--line);">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Certificates & languages</div>
+      <h2>Beyond the projects.</h2>
+    </div>
+    <div class="two-col">
+      <ul class="cert-list">
+        <li>45-day training certificate in Angular & Firebase</li>
+        <li>AWS Cloud Foundations — AWS Academy</li>
+        <li>Cyber Security training — in-college program by Kubotor Technology Pvt. Ltd.</li>
+        <li>Certificates and awards for Mathematics projects at college level</li>
+      </ul>
+      <div>
+        <h3 class="mono" style="font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:14px;">Languages</h3>
+        <div class="lang-chip-row">
+          <span class="skill-chip">Hindi</span>
+          <span class="skill-chip">English</span>
+          <span class="skill-chip">Punjabi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap reveal">
+    <div class="contact-box">
+      <div class="eyebrow" style="justify-content:center; color:#9FB1FF;">Get in touch</div>
+      <h2 style="margin-top:14px;">Open to full stack developer roles.</h2>
+      <p>Final-year B.Tech student, available for opportunities — let's talk about what you're building.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:pk0540080@gmail.com">pk0540080@gmail.com</a>
+        <a class="btn btn-ghost" href="tel:+919815085147">+91 98150 85147</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/pinki-kumari-633726345" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="https://github.com/pinki-12" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Pinki Kumari · Built with care, panel by panel.</div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // scroll-spy: highlight active nav link
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector('.nav-links a[href="#' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(sec => spy.observe(sec));
+</script>
+
+</body>
+</html>
